@@ -15,13 +15,19 @@ def last(lista):
     return lista[-1]
 
 #Q5
-#def n_fibonacci(n):
+def n_fibonacci(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return n_fibonacci(n-1) + n_fibonacci(n-2)
 
 #Q6
 def concat_lists(l1, l2):
-    if l1 == []:
+    if l1 == [] or l1 == '':
         return l2
-    elif l2 == []:
+    elif l2 == [] or l2 == '':
         return l1
     else:
         return [head(l1)] + concat_lists(tail(l1), l2)
@@ -55,8 +61,6 @@ def bigger_than_n(n, l):
     else:
         return bigger_than_n(n, tail(l))
     
-
-#CONFERIR SE PODE USAR A Q6 ASSIM!!    
 #Q10
 def bigger_than_n_list(n, l):
     if l == []:
@@ -65,5 +69,43 @@ def bigger_than_n_list(n, l):
         return concat_lists([head(l)], bigger_than_n_list(n, tail(l)))
     else:
         return bigger_than_n_list(n, tail(l))
+    
+#Q11
+def list_inversion(l):
+    if l == [] or l == '':
+        return []
+    else:
+        return concat_lists(list_inversion(tail(l)), [head(l)])
 
-print(bigger_than_n_list(2, [1,2,3,4]))
+#Q12
+def palindrome(l):
+    if l == [] or l == '':
+        return []
+    else:
+        return concat_lists(l, list_inversion(l))
+    
+#Q13
+def list_size(l):
+    if l == [] or l == '':
+        return 0
+    else:
+        return 1 + list_size(tail(l))
+
+#Q14
+def aux_is_prime(n, n2):
+    if n == 2 or n2 == 1:
+        return True
+    elif n % n2 != 0:
+        return aux_is_prime(n, n2-1)
+    else:
+        return False
+    
+def is_prime(n):
+    if n <= 1:
+        return False
+    else:
+        return aux_is_prime(n, n-1)
+    
+print(is_prime(int(input())))
+print(palindrome('abcd'))
+print(list_size([1,2,3,4,5,6]))
