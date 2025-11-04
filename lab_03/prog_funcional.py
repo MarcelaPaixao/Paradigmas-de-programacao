@@ -34,7 +34,7 @@ def concat_lists(l1, l2):
 
 #Q7
 def is_in_list(x, l):
-    if l == []:
+    if l == [] or l == '':
         return False
     elif x == head(l):
         return True
@@ -99,13 +99,116 @@ def aux_is_prime(n, n2):
         return aux_is_prime(n, n2-1)
     else:
         return False
-    
 def is_prime(n):
     if n <= 1:
         return False
     else:
         return aux_is_prime(n, n-1)
+
+
+#Q15
+#Retorna uma lista somente com os elementos de l2 que não ocorrem em l1
+def strip(l1, l2):
+    if l2 == [] or l2 == '':
+        return []
+    elif is_in_list(head(l2), l1):
+        return strip(l1, tail(l2))
+    else:
+        return [head(l2)] + strip(l1, tail(l2))
+
+
+#Q16
+def is_consonant(x):
+    if x != 'a' and x != 'e' and x != 'i' and x != 'o' and x != 'u':
+        return True
+    else:
+        return False
+
+#Retorna uma lista com somente os elementos em comum entre l1 e l2
+def inverse_strip(l1, l2):
+    if l2 == [] or l2 == '':
+        return []
+    elif is_in_list(head(l2), l1):
+        return [head(l2)] + inverse_strip(l1, tail(l2))
+    else:
+        return inverse_strip(l1, tail(l2))
+
+def consoant_list(l1, l2):
+    if l2 == [] or l2 == '' or l1 == [] or l1 == '':
+        return False
+    elif l1 == inverse_strip(l1,l2):
+        return True
+    else:
+        return False
+    # elif head(l1) != head(inverse_strip(l1,l2)):
+    #     return False
+    # else:
+    #     return consoant_list(tail(l1), tail(inverse_strip(l1,l2)))
+
+
+#Q17
+#def matches(l1, l2):
+
+#Q18
+def next_prime(n):
+    if is_prime(n+1) == False:
+        return next_prime(n+1)
+    else:
+        return n+1
+
+
+#Q19
+def aux_primes(n, n2):
+    if n2 > n or n <= 1:
+        return []
+    elif n%n2 == 0:
+        return [n2] + aux_primes(n/n2, n2)
+    else:
+        return aux_primes(n, next_prime(n2))
+def primes(n):
+    if n <= 1:
+        return []
+    else:
+        return aux_primes(n, 2)
+
+#Q20
+def aux_prime_factors(x, l, f):
+    if l == []:
+        return [(x,f)]
+    elif x == head(l):
+        return aux_prime_factors(x, tail(l), f+1)
+    else:
+        return [(x,f)] + aux_prime_factors(head(l), tail(l), 1)
+def prime_factors(n):
+    if n <= 1:
+        return [()]
+    else:
+        return aux_prime_factors(head(primes(n)), tail(primes(n)), 1)
     
-print(is_prime(int(input())))
-print(palindrome('abcd'))
-print(list_size([1,2,3,4,5,6]))
+
+#Q23
+def aux_split_half(l, size):
+    if l == [] or size == 0:
+        return []
+    else:
+        return [head(l)] + aux_split_half(tail(l), size - 1)
+def split_half(l):
+    if (list_size(l) % 2) == 0:
+        return [aux_split_half(l, list_size(l)/2), list_inversion(aux_split_half(list_inversion(l), list_size(l)/2))]
+    else:
+        return [aux_split_half(l, (list_size(l) - 1)/2), list_inversion(aux_split_half(list_inversion(l), (list_size(l) + 1)/2))]
+
+# print(is_prime(int(input())))
+# print(palindrome('abcd'))
+# print(list_size([1,2,3,4,5,6]))
+# print(strip([1,2,3,4,5], [1,2,5,7,8,1,1,1]))
+# print(strip('sdd', 'saude'))
+
+# print(consoant_list('sdd', 'saude'))
+# print(consoant_list(['s','d','d'], 'saude'))
+# print(consoant_list(['s','d','d'], 'saudade'))
+
+# print(next_prime(int(input())))
+# print(primes(int(input())))
+# print(prime_factors(int(input())))
+print(split_half([1,2,3,4,5,6,7]))
