@@ -116,38 +116,12 @@ def strip(l1, l2):
     else:
         return [head(l2)] + strip(l1, tail(l2))
 
-
 #Q16
-def is_consonant(x):
-    if x != 'a' and x != 'e' and x != 'i' and x != 'o' and x != 'u':
-        return True
-    else:
-        return False
-
-#Retorna uma lista com somente os elementos em comum entre l1 e l2
-def inverse_strip(l1, l2):
-    if l2 == [] or l2 == '':
-        return []
-    elif is_in_list(head(l2), l1):
-        return [head(l2)] + inverse_strip(l1, tail(l2))
-    else:
-        return inverse_strip(l1, tail(l2))
-
-def consoant_list(l1, l2):
-    if l2 == [] or l2 == '' or l1 == [] or l1 == '':
-        return False
-    elif l1 == inverse_strip(l1,l2):
-        return True
-    else:
-        return False
-    # elif head(l1) != head(inverse_strip(l1,l2)):
-    #     return False
-    # else:
-    #     return consoant_list(tail(l1), tail(inverse_strip(l1,l2)))
+#FALTA FAZER
 
 
 #Q17
-#def matches(l1, l2):
+#FALTA FAZER
 
 #Q18
 def next_prime(n):
@@ -155,7 +129,6 @@ def next_prime(n):
         return next_prime(n+1)
     else:
         return n+1
-
 
 #Q19
 def aux_primes(n, n2):
@@ -179,12 +152,31 @@ def aux_prime_factors(x, l, f):
         return aux_prime_factors(x, tail(l), f+1)
     else:
         return [(x,f)] + aux_prime_factors(head(l), tail(l), 1)
+    
 def prime_factors(n):
     if n <= 1:
         return [()]
     else:
         return aux_prime_factors(head(primes(n)), tail(primes(n)), 1)
     
+#Q21
+#ajustar impressão
+def split_aux(x,l):
+    if l == []:
+        return []
+    else:
+        return [split_token(x,l)]
+    
+def split_token(x, l):
+    if l == []:
+        return []
+    elif head(l) != x:
+        return [head(l)] + split_token(x, tail(l))
+    else:
+        return [split_token(x, tail(l))]
+
+#Q22
+#FALTA FAZER
 
 #Q23
 def aux_split_half(l, size):
@@ -192,11 +184,56 @@ def aux_split_half(l, size):
         return []
     else:
         return [head(l)] + aux_split_half(tail(l), size - 1)
+
 def split_half(l):
     if (list_size(l) % 2) == 0:
         return [aux_split_half(l, list_size(l)/2), list_inversion(aux_split_half(list_inversion(l), list_size(l)/2))]
     else:
         return [aux_split_half(l, (list_size(l) - 1)/2), list_inversion(aux_split_half(list_inversion(l), (list_size(l) + 1)/2))]
+
+#Q24
+def pyths(n):
+    if n == 0:
+        return [()]
+    else:
+        return [(x,y,z) for z in range(1,n+1)
+                        for y in range(1, n+1)
+                        for x in range(1, n+1)
+                        if x*x + y*y == z*z]
+
+#Q25
+def sum_divisors(n, d):
+    if n == 0 or n == d:
+        return 0
+    elif n%d == 0:
+        return d + sum_divisors(n, d+1)
+    else:
+        return sum_divisors(n, d+1)
+
+def perfects(n):
+    if n <= 0:
+        return []
+    else:
+        return [x for x in range(1, n+1) if x == sum_divisors(x, 1)]
+
+#Q26
+def scalar_product(l1, l2):
+    if l1 == [] or l2 == []:
+        return 0
+    else:
+        return sum([x*y for x,y in zip(l1,l2)])
+
+#Q27
+#FALTA FAZER
+
+#Q28
+def is_palindrome(s):
+    if s == '':
+        return False
+    else:
+        return list_inversion(s) == list_inversion(list_inversion(s))
+
+
 
 # print(is_prime(int(input())))
 # print(palindrome('abcd'))
@@ -211,4 +248,11 @@ def split_half(l):
 # print(next_prime(int(input())))
 # print(primes(int(input())))
 # print(prime_factors(int(input())))
-print(split_half([1,2,3,4,5,6,7]))
+# print(split_half([1,2,3,4,5,6,7]))
+
+# print(split_aux(2, [1,2,3,4,2,5,67,8,9,0,3]))
+
+# print(is_palindrome('azul'))
+# print(pyths(5))
+# print(scalar_product([1,2,3], [4,5,6]))
+# print(perfects(500))
