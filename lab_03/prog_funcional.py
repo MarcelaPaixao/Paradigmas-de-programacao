@@ -1,18 +1,30 @@
 #Q1
 def head(lista):
-    return lista[0]
+    if lista == [] or lista == '':
+        return []
+    else:
+        return lista[0]
 
 #Q2
 def tail(lista):
-    return lista[1:]
+    if lista == [] or lista == '':
+        return []
+    else:
+        return lista[1:]
 
 #Q3
 def init(lista):
-    return lista[:-1]
+    if lista == [] or lista == '':
+        return []
+    else:
+        return lista[:-1]
 
 #Q4
 def last(lista):
-    return lista[-1]
+    if lista == [] or lista == '':
+        return []
+    else:
+        return lista[-1]
 
 #Q5
 def n_fibonacci(n):
@@ -160,20 +172,19 @@ def prime_factors(n):
         return aux_prime_factors(head(primes(n)), tail(primes(n)), 1)
     
 #Q21
-#ajustar impressão
-def split_aux(x,l):
+def split_aux(x, l, b):
     if l == []:
-        return []
+        return [b]
+    elif x != head(l):
+        return split_aux(x, tail(l),  b + [head(l)])
     else:
-        return [split_token(x,l)]
+        return [b] + split_aux(x, tail(l), [])
     
-def split_token(x, l):
+def split_token(x,l):
     if l == []:
         return []
-    elif head(l) != x:
-        return [head(l)] + split_token(x, tail(l))
     else:
-        return [split_token(x, tail(l))]
+        return split_aux(x, l, [])
 
 #Q22
 #FALTA FAZER
@@ -231,13 +242,68 @@ def is_palindrome(s):
     if s == '':
         return False
     else:
+        # Aplicação de list_inversion dos dois lados porque não dá para comparar lista com string
         return list_inversion(s) == list_inversion(list_inversion(s))
 
+#Q29
+def aux_compress(x, l):
+    if l == []:
+        return [x]
+    elif x == head(l):
+        return aux_compress(x, tail(l))
+    else:
+        return [x] + aux_compress(head(l), tail(l))
 
+def compress(l):
+    if compress == []:
+        return []
+    else:
+        return aux_compress(head(l), tail(l))
 
+#Q30
+def aux_pack(l, b):
+    if l == [] and b == []:
+        return []
+    elif l == [] and b != []:
+        return [b + [head(l)]]
+    elif head(l) == head(tail(l)):
+        return aux_pack(tail(l), b + [head(l)])
+    elif b != []:
+        return [b + [head(l)]] + aux_pack(tail(l), [])
+    else:
+        return [head(l)] + aux_pack(tail(l), [])
+
+def pack(l):
+    if l == []:
+        return []
+    else:
+        return aux_pack(l, [])
+
+#Q31
+def aux_encode(string, f):
+    if string == '':
+        return []
+    elif head(string) == head(tail(string)):
+        return aux_encode(tail(string), f+1)
+    else:
+        return [(f, head(string))] + aux_encode(tail(string), 1)
+
+def encode(string):
+    if string == '':
+        return []
+    else:
+        return aux_encode(string, 1)
+
+#Q32
+def decode(list):
+    if list == []:
+        return ''
+    else:
+        return head(list)[1] * head(list)[0] + decode(tail(list))
+
+# print(n_fibonacci(5))
 # print(is_prime(int(input())))
 # print(palindrome('abcd'))
-# print(list_size([1,2,3,4,5,6]))
 # print(strip([1,2,3,4,5], [1,2,5,7,8,1,1,1]))
 # print(strip('sdd', 'saude'))
 
@@ -249,10 +315,11 @@ def is_palindrome(s):
 # print(primes(int(input())))
 # print(prime_factors(int(input())))
 # print(split_half([1,2,3,4,5,6,7]))
-
-# print(split_aux(2, [1,2,3,4,2,5,67,8,9,0,3]))
-
-# print(is_palindrome('azul'))
+# print(split_token(2, [1,2,3,4,2,5,67,8,9,0,3]))
 # print(pyths(5))
-# print(scalar_product([1,2,3], [4,5,6]))
 # print(perfects(500))
+# print(scalar_product([1,2,3], [4,5,6]))
+# print(is_palindrome('azul'))
+# print(compress([1,2,2,3,4,4,4,5]))
+# print(encode('aaaabccaadeeee'))
+# print(decode([(4, 'a'), (1, 'b'), (2, 'c'), (2, 'a'), (1, 'd'), (4, 'e')]))
