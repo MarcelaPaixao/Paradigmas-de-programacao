@@ -103,17 +103,7 @@ def f10():
             print(i)
 
 def f11():
-    num = float(input())
-    cedulas = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0}
-
-    for valor in cedulas.keys():
-        cedulas[valor] = int(num/valor)
-        num = num%valor
-
-        if(valor == 2 and num != 0):
-            cedulas[valor] += 1  
-
-        print(f'Cédulas de {valor} = {cedulas[valor]}')
+    print('FAZER')################################
 
 def f12():
     n = int(input())
@@ -179,30 +169,5 @@ def f16():
         print('\nTente novamente: ')
 
     print(f'Qtd de tentativas: {count}')
-
-def f20():
-    A = B = N = Br = 0
-
-    while 1:
-        voto = int(input())
-
-        if voto == 0:
-            break
-        elif voto == 1:
-            A += 1
-        elif voto == 2:
-            B += 1
-        elif voto == 3:
-            N += 1
-        else:
-            Br +=1
-
-    total = A+B+N+Br
-    print(f'Total de votos: {total}')
-    print(f'Candidato A: {(A/total):.2f}%')
-    print(f'Candidato B: {(B/total):.2f}%')
-    print(f'Votos nulos: {(N/total):.2f}%')
-    print(f'Votos em branco: {(Br/total):.2f}%')
-
     
-f20()
+f13()

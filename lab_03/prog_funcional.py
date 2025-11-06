@@ -27,19 +27,13 @@ def last(lista):
         return lista[-1]
 
 #Q5
-def n_fibonacci(n):
-    if n == 0:
-        return 0
-    elif n == 1:
-        return 1
-    else:
-        return n_fibonacci(n-1) + n_fibonacci(n-2)
+#def n_fibonacci(n):
 
 #Q6
 def concat_lists(l1, l2):
-    if l1 == [] or l1 == '':
+    if l1 == []:
         return l2
-    elif l2 == [] or l2 == '':
+    elif l2 == []:
         return l1
     else:
         return [head(l1)] + concat_lists(tail(l1), l2)
@@ -73,6 +67,8 @@ def bigger_than_n(n, l):
     else:
         return bigger_than_n(n, tail(l))
     
+
+#CONFERIR SE PODE USAR A Q6 ASSIM!!    
 #Q10
 def bigger_than_n_list(n, l):
     if l == []:
@@ -81,14 +77,8 @@ def bigger_than_n_list(n, l):
         return concat_lists([head(l)], bigger_than_n_list(n, tail(l)))
     else:
         return bigger_than_n_list(n, tail(l))
-    
-#Q11
-def list_inversion(l):
-    if l == [] or l == '':
-        return []
-    else:
-        return concat_lists(list_inversion(tail(l)), [head(l)])
 
+<<<<<<< HEAD
 #Q12
 def palindrome(l):
     if l == [] or l == '':
@@ -323,3 +313,6 @@ def decode(list):
 # print(compress([1,2,2,3,4,4,4,5]))
 # print(encode('aaaabccaadeeee'))
 # print(decode([(4, 'a'), (1, 'b'), (2, 'c'), (2, 'a'), (1, 'd'), (4, 'e')]))
+=======
+print(bigger_than_n_list(2, [1,2,3,4]))
+>>>>>>> parent of cc2a5e7 (completo até q14)
