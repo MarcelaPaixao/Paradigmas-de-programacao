@@ -131,7 +131,6 @@ def strip(l1, l2):
 #Q16
 #FALTA FAZER
 
-
 #Q17
 #FALTA FAZER
 
@@ -235,7 +234,19 @@ def scalar_product(l1, l2):
         return sum([x*y for x,y in zip(l1,l2)])
 
 #Q27
-#FALTA FAZER
+def aux_n_queens(pos1, pos2):
+    if pos1[0] == pos2[0] or pos1[1] == pos2[1]:
+        return True
+    elif abs(pos1[0] - pos2[0]) == abs(pos1[1] - pos2[1]):
+        return True
+    else:
+        return False
+
+def n_queens_attack(pos, l):
+    if l == []:
+        return False
+    else:
+        return aux_n_queens(pos, head(l)) or n_queens_attack(pos, tail(l))
 
 #Q28
 def is_palindrome(s):
@@ -319,6 +330,8 @@ def decode(list):
 # print(pyths(5))
 # print(perfects(500))
 # print(scalar_product([1,2,3], [4,5,6]))
+# print(n_queens_attack((1,2), [(2,2), (2,0)]))
+# print(n_queens_attack((3,3), [(1, 2), (2, 5), (4, 1)]))
 # print(is_palindrome('azul'))
 # print(compress([1,2,2,3,4,4,4,5]))
 # print(encode('aaaabccaadeeee'))
